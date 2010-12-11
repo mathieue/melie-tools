@@ -1,9 +1,0 @@
-#!/bin/sh
-set -e
-
-command="melie-find $1"
-shift
-for arg in "$@"; do
-	command="${command} | grep -i \"${arg}\"";
-done;
-eval $command

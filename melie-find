@@ -1,12 +1,13 @@
-#!/bin/bash
+#!/bin/sh
 set -e
 
-PARAM="$@"
+PARAM=$1
 if [ $# -eq 0  ]; then
 	PARAM="."
 fi	
-if [ $# -gt 1 ]; then
-	echo "`basename $0` takes zero or one parameter"  
-	exit 1
-fi
-find -type d \( -name .git -o -name .svn \) -prune -o -iname "*${PARAM}*" -print
+shift
+command="find -type d \\( -name .git -o -name .svn \\) -prune -o -iname \"*${PARAM}*\" -print"
+for arg in "$@"; do
+	command="${command} | grep -i \"${arg}\"";
+done;
+eval $command

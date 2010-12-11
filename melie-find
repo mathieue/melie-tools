@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+
+PARAM="$@"
+if [ $# -eq 0  ]; then
+	PARAM="."
+fi	
+if [ $# -gt 1 ]; then
+	echo "`basename $0` takes zero or one parameter"  
+	exit 1
+fi
+find -type d \( -name .git -o -name .svn \) -prune -o -iname "*${PARAM}*" -print

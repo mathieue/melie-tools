@@ -1,8 +1,7 @@
 #!/bin/sh
 set -e
 
-PARAM="\"$1\" ."
-command="rgrep -I --exclude-dir='\tmp\' --exclude-dir=\'.svn\' --exclude-dir=\'.git\' --exclude=\'*.gz\' --exclude=\'*.dump\' --exclude=\'*.sql\' ${PARAM}"
+command="grep \"$1\""
 shift
 for arg in "$@"; do
 	command="${command} | grep \"${arg}\"";

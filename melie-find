@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+last_arg="${!#}"
+
 PARAM=$1
 if [ $# -eq 0  ]; then
 	PARAM="."
@@ -8,6 +10,14 @@ fi
 shift
 command="find -type d \\( -name .git -o -name .svn \\) -prune -o -iname \"*${PARAM}*\" -print"
 for arg in "$@"; do
+	if [ $arg = '-e' ];
+	then
+		continue 
+	fi
 	command="${command} | grep -i \"${arg}\"";
 done;
+if  [ $last_arg = '-e' ];
+then
+	command="vim \$(${command})"
+fi
 eval $command

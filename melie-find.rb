@@ -9,7 +9,7 @@ opt_parser = OptionParser.new do |opt|
   opt.separator  ""
   opt.separator  "Options"
 
-  opt.on("-e","--edit","edit found files in vim") do |envrionment|
+  opt.on("-e","--edit","edit match files in vim") do |envrionment|
     options[:edit] = true
   end
 

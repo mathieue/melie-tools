@@ -11,12 +11,21 @@ for arg in "$@"; do
 	then
 		continue 
 	fi
+	if [ $arg = '-l' ];
+	then
+		continue 
+	fi
 	command="${command} | grep \"${arg}\"";
 done;
 
 if  [ $last_arg = '-e' ];
 then
 	command="vim \$(${command} | awk -F\":\" '{print \$1}')"
+fi
+
+if  [ $last_arg = '-l' ];
+then
+	command="${command} | cut -f1 -d: | sort -u"
 fi
 
 eval $command
